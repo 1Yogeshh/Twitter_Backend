@@ -61,3 +61,48 @@ export const likeOrDislike = async (req,res) => {
         console.log(error);
     }
 };
+
+export const getTweet = async (req, res)=>{
+    try{
+        const id= req.body.id;
+        const loggedInUser= await User.findById(id);
+        const loggedInUserTweet = await Tweet.find({userId:id})
+        const followingUserTweet = await Promise.all(loggedInUser.following.map((otherUserId)=>{
+            return Tweet.find({userId:otherUserId})
+        }));
+        return res.status(200).json({
+            tweets:loggedInUserTweet.concat(...followingUserTweet)
+        })
+
+    }catch(error){
+        console.log(error);
+    }
+}
+
+export const getFollowingTweets = async (req,res) =>{
+    try {
+        const id = req.params.id;
+        const loggedInUser = await User.findById(id); 
+        const followingUserTweet = await Promise.all(loggedInUser.following.map((otherUsersId)=>{
+            return Tweet.find({userId:otherUsersId});
+        }));
+        return res.status(200).json({
+            tweets:[].concat(...followingUserTweet)
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const ownTweet = async (req, res)=>{
+    try{
+        const loggedInUser= await User.findById(id);
+        const loggedInUserTweet = await Tweet.find({userId:id})
+        return res.status(200).json({
+            tweets:loggedInUserTweet
+        })
+
+    }catch(error){
+        console.log(error);
+    }
+}
