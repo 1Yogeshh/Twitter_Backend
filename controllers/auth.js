@@ -2,14 +2,14 @@ import { User } from "../Models/userSchema.js";
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
 
-export const Register=async(req,ref)=>{
+export const Register=async(req,res)=>{
     try{
         const{name,username,email,password}=req.body;
 
         //basic validation
         if(!name || !username || !email || !password){
 
-            return res.status(401).json({
+            return res.status(403).json({
                 message:"all field are required",
                 success:false
             })
@@ -19,7 +19,7 @@ export const Register=async(req,ref)=>{
         //
         const user =await User.findOne({email});
         if(user){
-            return res.status(401).json({
+            return res.status(402).json({
                 message:"User already exits",
                 success:false
             })
@@ -36,12 +36,12 @@ export const Register=async(req,ref)=>{
             password:hashedPassword
         });
 
-        return res.status(401).json({
+        return res.status(201).json({
             message:"Account Created",
             success:true
         })
     }catch(error){
-
+        console.log(error);
     }
 }
 
