@@ -109,6 +109,20 @@ export const getMyProfile = async (req, res) => {
     }
 };
 
+export const updateProfile=async(req, res)=>{
+    const {name, email, bio}= req.body;
+    const id = req.params.id;
+    const user= await User.findById(id)
+    if(name)user.name= name;
+    if(email)user.email= email;
+    if(bio)user.bio= bio;
+    await user.save();
+    return res.status(200).json({
+        success:true,
+        message:"update the profile"
+    })
+}
+
 
 
 export const getOtherUsers = async (req,res) =>{ 

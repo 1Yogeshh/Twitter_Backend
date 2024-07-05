@@ -1,5 +1,5 @@
 import express from "express"
-import { Login, Logout, Register, follow, getMyProfile, getOtherUsers, unfollow } from "../controllers/auth.js";
+import { Login, Logout, Register, follow, getMyProfile, getOtherUsers, unfollow, updateProfile } from "../controllers/auth.js";
 import isAuthenticated from "../config/auth.js";
 
 const router= express.Router();
@@ -11,5 +11,6 @@ router.route("/profile/:id").get(isAuthenticated,getMyProfile);
 router.route("/otheruser/:id").get(isAuthenticated,getOtherUsers);
 router.route("/follow/:id").post(isAuthenticated,follow);
 router.route("/unfollow/:id").post(isAuthenticated,unfollow);
+router.route("/update/:id").put(isAuthenticated, updateProfile)
 
 export default router;

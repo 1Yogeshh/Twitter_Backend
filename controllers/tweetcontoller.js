@@ -64,7 +64,7 @@ export const likeOrDislike = async (req,res) => {
 
 export const getTweet = async (req, res)=>{
     try{
-        const id= req.body.id;
+        const id= req.params.id;
         const loggedInUser= await User.findById(id);
         const loggedInUserTweet = await Tweet.find({userId:id})
         const followingUserTweet = await Promise.all(loggedInUser.following.map((otherUserId)=>{

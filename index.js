@@ -42,7 +42,7 @@ app.use(cors({
 
 //routes
 app.use("/api",userRoute);
-app.use("/tweet",tweetRoute)
+app.use("/tweet",tweetRoute);
 
 app.listen(PORT, ()=>{
     console.log(`server is listen at port ${PORT}`);

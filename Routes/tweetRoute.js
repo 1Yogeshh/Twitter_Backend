@@ -9,7 +9,7 @@ router.route("/delete/:id").delete(isAuthenticated, deleteTweet)
 router.route("/like/:id").put(isAuthenticated,likeOrDislike)
 router.route("/alltweet/:id").get(isAuthenticated,getTweet)
 router.route("/followingtweet/:id").get(isAuthenticated,getFollowingTweets)
-router.route("/alltweet/:id").get(isAuthenticated,ownTweet)
+router.route("/owntweet/:id").get(isAuthenticated,ownTweet)
 
 
 export default router;
