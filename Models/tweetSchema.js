@@ -16,6 +16,10 @@ const tweetSchema=new mongoose.Schema({
     userDetails:{
         type:Array,
         default:[]
+    },
+    image:{
+        url:String,
+        public_id:String
     }
 },{timestamps:true})
 

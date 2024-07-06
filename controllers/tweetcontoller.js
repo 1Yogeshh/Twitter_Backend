@@ -1,5 +1,13 @@
 import { Tweet } from "../Models/tweetSchema.js";
 import { User } from "../Models/userSchema.js";
+ 
+import cloudinary from "cloudinary";
+cloudinary.config({
+    cloud_name:process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API,
+    api_secret:process.env.CLOUDINARY_SECRET
+
+})
 
 export const createTweet = async (req, res) => {
     try {
@@ -81,6 +89,8 @@ export const getTweet = async (req, res)=>{
 
 export const getFollowingTweets = async (req,res) =>{
     try {
+        
+
         const id = req.params.id;
         const loggedInUser = await User.findById(id); 
         const followingUserTweet = await Promise.all(loggedInUser.following.map((otherUsersId)=>{
@@ -104,5 +114,20 @@ export const ownTweet = async (req, res)=>{
 
     }catch(error){
         console.log(error);
+    }
+}
+
+export const ImageUpload= async(req,res)=>{
+    //console.log("Image details", req.files);
+    try {
+        const res= await cloudinary.uploader.upload(req.file.path)
+        console.log("upload image",res);
+        res.json({
+            url:res.secure_url,
+            public_id:res.public_id
+        })
+    } catch (error) {
+        console.log(error);
+        
     }
 }

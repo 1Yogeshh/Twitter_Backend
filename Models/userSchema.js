@@ -28,6 +28,10 @@ const userSchema=new mongoose.Schema({
     bio:{
         type:String,
         default:""
+    },
+    image: {
+        type:String,
+        required:[true,'Please enter the field']
     }
 },{timestamps:true})
 
