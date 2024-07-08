@@ -1,17 +1,12 @@
 import { Tweet } from "../Models/tweetSchema.js";
 import { User } from "../Models/userSchema.js";
  
-import cloudinary from "cloudinary";
-cloudinary.config({
-    cloud_name:process.env.CLOUDINARY_NAME,
-    api_key: process.env.CLOUDINARY_API,
-    api_secret:process.env.CLOUDINARY_SECRET
 
-})
 
 export const createTweet = async (req, res) => {
     try {
         const { discription, id } = req.body;
+        let {img}= req.body;
         if (!discription || !id) {
             return res.status(401).json({
                 message: "Fields are required.",
@@ -21,6 +16,7 @@ export const createTweet = async (req, res) => {
         const user = await User.findById(id).select("-password");
         await Tweet.create({
             discription,
+            img,
             userId:id,
             userDetails:user
         });
@@ -128,6 +124,15 @@ export const ImageUpload= async(req,res)=>{
         })
     } catch (error) {
         console.log(error);
+        
+    }
+}
+
+
+export const Comment= async(req, rea)=>{
+    try {
+        
+    } catch (error) {
         
     }
 }

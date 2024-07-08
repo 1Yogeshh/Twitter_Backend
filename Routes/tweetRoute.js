@@ -13,7 +13,8 @@ router.route("/alltweet/:id").get(isAuthenticated,getTweet)
 router.route("/followingtweet/:id").get(isAuthenticated,getFollowingTweets)
 router.route("/owntweet/:id").get(isAuthenticated,ownTweet)
 
-router.route("/upload-image",upload.single('image')).post(isAuthenticated,ImageUpload)
 
+router.route("comment/:id").put(isAuthenticated)
+router.route("uncomment/:id").put(isAuthenticated)
 
 export default router;

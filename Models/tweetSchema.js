@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 
 const tweetSchema=new mongoose.Schema({
@@ -17,9 +18,9 @@ const tweetSchema=new mongoose.Schema({
         type:Array,
         default:[]
     },
-    image:{
-        url:String,
-        public_id:String
+    img:{
+        type:String,
+        default:""
     }
 },{timestamps:true})
 
